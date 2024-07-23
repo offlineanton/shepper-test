@@ -14,6 +14,7 @@ interface FormikInputProps {
         (e: React.FocusEvent<any>): void;
         <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
     }
+    placeholder?: string;
 }
 
 const FormikInput = ({
@@ -23,6 +24,7 @@ const FormikInput = ({
     error,
     onChange,
     onBlur,
+    placeholder,
 }: FormikInputProps) => {
     return (
         <>
@@ -30,12 +32,10 @@ const FormikInput = ({
             <Input
                 id={name}
                 name={name}
-                // label="Form Name"
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                // error={formik.touched.formName && Boolean(formik.errors.formName)}
-                // helperText={formik.touched.email && formik.errors.email} 
+                placeholder={placeholder}
             />
             {error && 
                 <ErrorMessage>{error}</ErrorMessage>

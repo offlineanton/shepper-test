@@ -19,9 +19,9 @@
  * 
  */
 
-import FormElement from "@/components/formElement";
-import FormWrapper from "@/components/formWrapper";
-import FormikInput from "@/components/inputs/formikInput";
+import FormElement from "@/components/FormElement/FormElement";
+import FormWrapper from "@/components/FormWrapper";
+import FormikInput from "@/components/inputs/FormikInput";
 import { Button } from "@/components/ui/button";
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
@@ -76,18 +76,22 @@ const FormBuilder = () => {
 
                         return (
                             <Form>
-                                <FormikInput 
+                                <FormikInput
                                     name="formName"
                                     label="Form Name"
                                     value={values.formName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     error={errors.formName}
+                                    placeholder={"Enter the name of your form here"}
                                 />
 
-                                {values.formElements.map((_, i) => (
+                                {values.formElements.map((formElement, i) => (
                                     <FormElement
                                         key={i}
+                                        index={i}
+                                        setFieldValue={setFieldValue}
+                                        formElement={formElement}
                                     />
                                 ))}
 
