@@ -25,7 +25,22 @@ import * as Yup from 'yup';
 
 const FormBuilderSchema = Yup.object().shape({
     formName: Yup.string().required("Form name is required"),
+    formElements: Yup.array()
+        .of(
+            Yup.object({
+                type: Yup.string().required("Input type is required"),
+                name: Yup.string().required("Input name is required"),
+                label: Yup.string().required("Label is required"),
+            })
+        )
+        .min(1, "Please add a form element")
 });
+
+const emptyFormElement = {
+    name: "",
+    type: "",
+    label: "",
+}
 
 const FormBuilder = () => {
     return (
@@ -45,8 +60,16 @@ const FormBuilder = () => {
                     values,
                     errors,
                     handleBlur,
-                    handleChange
+                    handleChange,
+                    setFieldValue,
                 }) => {
+                    console.log("errors", errors);
+                    console.log("values", values);
+
+                    const handleAddFormElement = () => {
+                        setFieldValue("formElements", [...values.formElements, emptyFormElement]);
+                    }
+
                     return (
                         <Form>
                             <FormikInput 
@@ -57,6 +80,13 @@ const FormBuilder = () => {
                                 onBlur={handleBlur}
                                 error={errors.formName}
                             />
+
+                            {values.formElements.map((_, i) => (
+                                <div key={i}>formElement</div>
+                            ))}
+
+                            <button type="button" onClick={handleAddFormElement}>Add form element</button>
+                            <br />
 
                             <button>submit</button>
                         </Form>
