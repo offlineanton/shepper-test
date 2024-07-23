@@ -19,14 +19,50 @@
  * 
  */
 
-import { Input } from "@/components/ui/input"
+import FormikInput from "@/components/inputs/formikInput";
+import { Form, Formik } from "formik";
+import * as Yup from 'yup';
+
+const FormBuilderSchema = Yup.object().shape({
+    formName: Yup.string().required("Form name is required"),
+});
 
 const FormBuilder = () => {
     return (
         <>
             <h1>Form Builder</h1>
+            <Formik 
+                initialValues={{
+                    formName: "",
+                    formElements: []
+                }}
+                validateOnChange={false}
+                validateOnBlur={false}
+                validationSchema={FormBuilderSchema}
+                onSubmit={() => {}}
+            >
+                {({
+                    values,
+                    errors,
+                    handleBlur,
+                    handleChange
+                }) => {
+                    return (
+                        <Form>
+                            <FormikInput 
+                                name="formName"
+                                label="Form Name"
+                                value={values.formName}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                error={errors.formName}
+                            />
 
-            <Input />
+                            <button>submit</button>
+                        </Form>
+                    )
+                }}
+            </Formik>
 
             {/* Add a form title */}
             {/* generates ID */}
