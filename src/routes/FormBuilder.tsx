@@ -19,10 +19,14 @@
  * 
  */
 
+import { Input } from "@/components/ui/input"
+
 const FormBuilder = () => {
     return (
         <>
             <h1>Form Builder</h1>
+
+            <Input />
 
             {/* Add a form title */}
             {/* generates ID */}
