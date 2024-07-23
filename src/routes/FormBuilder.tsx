@@ -19,6 +19,7 @@
  * 
  */
 
+import FormElement from "@/components/formElement";
 import FormWrapper from "@/components/formWrapper";
 import FormikInput from "@/components/inputs/formikInput";
 import { Button } from "@/components/ui/button";
@@ -85,7 +86,9 @@ const FormBuilder = () => {
                                 />
 
                                 {values.formElements.map((_, i) => (
-                                    <div key={i}>formElement</div>
+                                    <FormElement
+                                        key={i}
+                                    />
                                 ))}
 
                                 <Button 

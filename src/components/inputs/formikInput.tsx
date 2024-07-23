@@ -1,3 +1,4 @@
+import ErrorMessage from "../errorMessage";
 import { Input } from "../ui/input";
 
 interface FormikInputProps {
@@ -37,7 +38,7 @@ const FormikInput = ({
                 // helperText={formik.touched.email && formik.errors.email} 
             />
             {error && 
-                <p>{error}</p> 
+                <ErrorMessage>{error}</ErrorMessage>
             }
         </>
     )
