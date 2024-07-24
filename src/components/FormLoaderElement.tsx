@@ -4,6 +4,7 @@ import FormikInput from "./inputs/FormikInput";
 import FormikSelect from "./inputs/FormikSelect";
 import FormikTextarea from "./inputs/FormikTextarea";
 import { ResultObject } from "@/routes/FormLoader";
+import FormikCheckbox from "./inputs/FormikCheckbox";
 
 interface FormLoaderElementProps {
     formElement: FormElement;
@@ -38,13 +39,15 @@ const FormLoaderElement = ({
 
     if (formElement.type === "checkbox") {
         return (
-            <div>
-                <FormikTextarea
+            <div className="mt-5 mb-5">
+                <FormikCheckbox
                     value={value || ""}
                     name={formElement.name}
                     label={formElement.label}
                     
-                    onChange={onChange}
+                    onChange={() => {
+                        setFieldValue(formElement.name, !value);
+                    }}
                 />
             </div>
         )

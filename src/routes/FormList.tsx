@@ -5,12 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 
 interface FormListProps {
     // TODO: type
-    forms: any[]
+    forms: any[];
+    fillInForm: (index: number) => void;
 }
 
 const FormList = ({
-    forms
+    forms,
+    fillInForm
 }: FormListProps) => {
+
     return (
         <FormWrapper>
             <div className="flex justify-between">
@@ -24,17 +27,15 @@ const FormList = ({
                 </Link>
             </div>
 
-            {forms.map(form => (
+            {forms.map((form, index) => (
                 <Card className="p-5 mt-10 flex justify-between items-center">
                     <p>
                         {form.formName}
                     </p>
 
-                    <Link to="/form-loader">
-                        <Button>
-                            Fill in form
-                        </Button>
-                    </Link>
+                    <Button onClick={() => fillInForm(index)}>
+                        Fill in form
+                    </Button>
                 </Card>
             ))}
         </FormWrapper>

@@ -56,7 +56,7 @@ function App() {
 
   // TODO: type
   const [savedForms, setSavedForms] = useState<any[]>(startForm);
-  const [selectedFormIndex] = useState<number | undefined>(0);
+  const [selectedFormIndex, setSelectedFormIndex] = useState<number | undefined>(0);
 
   // TODO: type
   const saveForm = (form: any) => {
@@ -65,6 +65,11 @@ function App() {
     console.log(savedForms);
   };
 
+  const fillInForm = (index: number) => {
+    setSelectedFormIndex(index);
+    navigate("/form-loader");
+  }
+
   console.log(savedForms);
 
   return (
@@ -72,7 +77,7 @@ function App() {
       <Routes>
         <Route path="/form-builder" element={<FormBuilder saveForm={saveForm} />} />
         <Route path="/form-loader" element={<FormLoader form={selectedFormIndex !== undefined ? savedForms[selectedFormIndex] : undefined}/>} />
-        <Route path="/" element={<FormList forms={savedForms} />}>
+        <Route path="/" element={<FormList forms={savedForms} fillInForm={fillInForm} />}>
         </Route>
       </Routes>
     </>
