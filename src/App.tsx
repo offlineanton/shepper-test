@@ -70,8 +70,6 @@ function App() {
     navigate("/form-loader");
   }
 
-  console.log(savedForms);
-
   return (
     <>
       <Routes>
