@@ -7,8 +7,10 @@ import { Button } from "../ui/button";
 import FormElementSelectOptions, { FormElementSelectOption } from "./FormElementSelectOptions";
 import IndexMarker from "../IndexMarker";
   
-type FormElement = {
-    type: string;
+type FormElementType = "text" | "textarea" | "checkbox" | "select";
+
+export interface FormElement {
+    type: FormElementType;
     name: string;
     label: string;
     options?: FormElementSelectOption[];

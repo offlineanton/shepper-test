@@ -51,7 +51,14 @@ export const emptyFormElement = {
     label: "",
 }
 
-const FormBuilder = () => {
+interface FormBuilderProps {
+    // TODO: type
+    saveForm: (form: any) => void;
+}
+
+const FormBuilder = ({
+    saveForm
+}: FormBuilderProps) => {
     return (
         <>
             <FormWrapper>
@@ -64,8 +71,9 @@ const FormBuilder = () => {
                     validateOnChange={false}
                     validateOnBlur={false}
                     validationSchema={formBuilderSchema}
-                    onSubmit={() => {
-                        console.error("dont")
+                    onSubmit={(values) => {
+                        saveForm(values);
+                        console.log("submit", values);
                     }}
                 >
                     {({
