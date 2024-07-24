@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
 
-const FormBuilderSchema = Yup.object().shape({
+const formBuilderSchema = Yup.object().shape({
     formName: Yup.string().required("Form name is required"),
     formElements: Yup.array()
         .of(
@@ -39,7 +39,13 @@ const FormBuilderSchema = Yup.object().shape({
         .min(1, "Please add a form element")
 });
 
-const emptyFormElement = {
+export interface EmptyFormElement {
+    name: string;
+    type: string;
+    label: string;
+}
+
+export const emptyFormElement = {
     name: "",
     type: "",
     label: "",
@@ -53,17 +59,19 @@ const FormBuilder = () => {
                 <Formik 
                     initialValues={{
                         formName: "",
-                        formElements: []
+                        formElements: [] as EmptyFormElement[],
                     }}
                     validateOnChange={false}
                     validateOnBlur={false}
-                    validationSchema={FormBuilderSchema}
-                    onSubmit={() => {}}
+                    validationSchema={formBuilderSchema}
+                    onSubmit={() => {
+                        console.error("dont")
+                    }}
                 >
                     {({
                         values,
                         errors,
-                        handleBlur,
+                        touched,
                         handleChange,
                         setFieldValue,
                     }) => {
@@ -74,6 +82,13 @@ const FormBuilder = () => {
                             setFieldValue("formElements", [...values.formElements, emptyFormElement]);
                         }
 
+                        const handleRemoveFormElement = (index: number) => {
+                            setFieldValue(
+                                "formElements",
+                                values.formElements.filter((_, i) => i !== index)
+                            );
+                        };
+
                         return (
                             <Form>
                                 <FormikInput
@@ -81,19 +96,25 @@ const FormBuilder = () => {
                                     label="Form Name"
                                     value={values.formName}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    error={errors.formName}
+                                    error={touched.formName ? errors.formName : undefined}
                                     placeholder={"Enter the name of your form here"}
                                 />
 
-                                {values.formElements.map((formElement, i) => (
-                                    <FormElement
-                                        key={i}
-                                        index={i}
-                                        setFieldValue={setFieldValue}
-                                        formElement={formElement}
-                                    />
-                                ))}
+                                {values.formElements.map((formElement, i) => {
+                                    return (
+                                        <FormElement
+                                            key={i}
+                                            index={i}
+                                            setFieldValue={setFieldValue}
+                                            handleRemoveFormElement={handleRemoveFormElement}
+                                            formElement={formElement}
+                                            errors={
+                                                errors.formElements 
+                                                ? (errors.formElements[i] as { [key: string]: string }) 
+                                                : undefined}
+                                        />
+                                    )
+                                })}
 
                                 <Button 
                                     className="mt-5"

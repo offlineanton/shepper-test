@@ -1,4 +1,5 @@
-import ErrorMessage from "../errorMessage";
+
+import ErrorMessage from "../ErrorMessage";
 import { Input } from "../ui/input";
 
 interface FormikInputProps {
@@ -10,10 +11,6 @@ interface FormikInputProps {
         (e: React.ChangeEvent<any>): void;
         <T = string | React.ChangeEvent<any>>(field: T): T extends React.ChangeEvent<any> ? void : (e: string | React.ChangeEvent<any>) => void;
     };
-    onBlur: {
-        (e: React.FocusEvent<any>): void;
-        <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
-    }
     placeholder?: string;
 }
 
@@ -23,7 +20,6 @@ const FormikInput = ({
     value,
     error,
     onChange,
-    onBlur,
     placeholder,
 }: FormikInputProps) => {
     return (
@@ -34,7 +30,7 @@ const FormikInput = ({
                 name={name}
                 value={value}
                 onChange={onChange}
-                onBlur={onBlur}
+                // onBlur={onBlur}
                 placeholder={placeholder}
             />
             {error && 

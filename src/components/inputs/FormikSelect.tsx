@@ -5,6 +5,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import ErrorMessage from "../ErrorMessage";
 
 interface FormikSelectProps {
     name: string;
@@ -34,28 +35,35 @@ const FormikSelect = ({
     placeholder,
 }: FormikSelectProps) => {
     return (
-        <label>
-            {label}
-            <Select
-                name={name}
-                value={value}
-                onValueChange={onChange}
-            >
-                <SelectTrigger>
-                    <SelectValue placeholder={placeholder} />
-                </SelectTrigger>
-                <SelectContent>
-                    {options.map(option => (
-                        <SelectItem 
-                            key={option.value}
-                            value={option.value}
-                        >
-                            {option.label}
-                        </SelectItem>
-                    ))}
-                </SelectContent>
-            </Select>
-        </label>
+        <>
+            <label>
+                {label}
+                <Select
+                    name={name}
+                    value={value}
+                    onValueChange={onChange}
+                >
+                    <SelectTrigger>
+                        <SelectValue placeholder={placeholder} />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {options.map(option => (
+                            <SelectItem 
+                                key={option.value}
+                                value={option.value}
+                            >
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
+            </label>
+            
+            {error && 
+                <ErrorMessage>{error}</ErrorMessage>
+            }
+        </>
+
     )
 }
 
