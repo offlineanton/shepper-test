@@ -11,7 +11,7 @@ interface FormLoaderProps {
     };
 }
 
-type ResultObject = {
+export type ResultObject = {
     [key: string]: undefined;
 };
 
@@ -43,14 +43,19 @@ const FormLoader = ({
                     // errors,
                     // touched,
                     handleChange,
-                    // setFieldValue,
+                    setFieldValue,
                 }) => {
                     console.log("values", values);
                     return (
                         <Form>
                             {form.formElements.map(formElement => {
                                 return (
-                                    <FormLoaderElement formElement={formElement} onChange={handleChange} value={values[formElement.name]} />
+                                    <FormLoaderElement 
+                                        formElement={formElement} 
+                                        onChange={handleChange} 
+                                        value={values[formElement.name]}
+                                        setFieldValue={setFieldValue} 
+                                    />
                                 )
                             })}
                         </Form>
