@@ -11,18 +11,24 @@ interface FormLoaderProps {
     };
 }
 
+type ResultObject = {
+    [key: string]: undefined;
+};
+
 const FormLoader = ({
     form
 }: FormLoaderProps) => {
-    console.log(form);
+    console.log(form.formElements);
     return (
         <FormWrapper>
             <h1 className="text-4xl mb-10">{form.formName}</h1>
 
             <Formik
                 //TODO: init values
-                initialValues={{
-                }}
+                initialValues={form.formElements.reduce<ResultObject>((acc, curr) => {
+                    acc[curr.name] = undefined;
+                    return acc;
+                }, {})}
                 validateOnChange={false}
                 validateOnBlur={false}
                 //TODO: schema
@@ -33,17 +39,20 @@ const FormLoader = ({
                 }}
             >
                 {({
-                    // values,
+                    values,
                     // errors,
                     // touched,
-                    // handleChange,
+                    handleChange,
                     // setFieldValue,
                 }) => {
+                    console.log("values", values);
                     return (
                         <Form>
-                            {form.formElements.map(formElement => (
-                                <FormLoaderElement formElement={formElement} />
-                            ))}
+                            {form.formElements.map(formElement => {
+                                return (
+                                    <FormLoaderElement formElement={formElement} onChange={handleChange} value={values[formElement.name]} />
+                                )
+                            })}
                         </Form>
                     )
                 }}
