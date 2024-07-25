@@ -84,7 +84,8 @@ const FormElement = ({
                     { value: "textarea", label: "Textarea" },
                     { value: "checkbox", label: "Checkbox" },
                     { value: "select", label: "Select" },
-                    { value: "group", label: "Group" },
+                    // TODO: groups
+                    // { value: "group", label: "Group" },
                 ]}
                 value={formElement.type}
                 error={errors ? errors["type"] : undefined}
@@ -101,15 +102,5 @@ const FormElement = ({
         </FormElementWrapper>
     )
 }
-
-/*
-
-- `text` - a standard short-form text field.
-- `textarea` - a standard long-form text field.
-- `checkbox` - a checkbox that outputs true/false.
-- `select` - a select dropdown, accepts possible options, allows customer to select one.
-- `group` - Allows depth within a form. Can hold child fields, and has a label of it's own.
-
-*/
 
 export default FormElement;

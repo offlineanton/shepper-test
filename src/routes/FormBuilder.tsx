@@ -1,24 +1,3 @@
-// example output of form builder: 
-/**
- * 
- * {
- *  formName: string
- *  id: string
- *  formElements: [
- *      {
- *          type: InputType
- *          label: string
- *          name: string
- *          
- *          IF InputType === group
- *          
- *          groupFormElements: []
- *      }
- *  ]
- * }
- * 
- */
-
 import FormElement, { Element } from "@/components/FormElement/FormElement";
 import FormWrapper from "@/components/FormWrapper";
 import FormikInput from "@/components/inputs/FormikInput";
@@ -146,16 +125,6 @@ const FormBuilder = ({
                     }}
                 </Formik>
             </FormWrapper>
-            
-
-            {/* Add a form title */}
-            {/* generates ID */}
-            {/* Add new form element button */}
-            {/* Select an input type */}
-            {/* Input name, input label */}
-            {/* If its a select, need to add select items */}
-            {/* Groups? */}
-            {/* Finish form button */}
         </>
     )
 }

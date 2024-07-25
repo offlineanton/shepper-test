@@ -4,53 +4,6 @@ import { useState } from "react";
 import FormList from "./routes/FormList";
 import FormLoader from "./routes/FormLoader";
 
-const startForm = [
-  {
-      "formName": "Form name 1",
-      "formElements": [
-          {
-              "name": "firstname",
-              "type": "text",
-              "label": "First name"
-          },
-          {
-              "name": "description",
-              "type": "textarea",
-              "label": "Description"
-          },
-          {
-              "name": "happy",
-              "type": "checkbox",
-              "label": "Are you happy?"
-          },
-          {
-              "name": "colour",
-              "type": "select",
-              "label": "Choose a colour",
-              "options": [
-                  {
-                      "label": "Red",
-                      "value": "red"
-                  },
-                  {
-                      "label": "Blue",
-                      "value": "blue"
-                  },
-                  {
-                      "label": "Green",
-                      "value": "green"
-                  },
-                  {
-                      "label": "Yellow",
-                      "value": "yellow"
-                  }
-              ]
-          }
-      ]
-  }
-];
-
-
 function App() {
   const navigate = useNavigate();
 

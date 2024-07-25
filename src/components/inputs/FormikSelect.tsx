@@ -13,10 +13,6 @@ interface FormikSelectProps {
     label: string;
     error?: string;
     onChange: (e: string) => void;
-    // onBlur: {
-    //     (e: React.FocusEvent<any>): void;
-    //     <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
-    // }
     placeholder?: string;
     options: {
         value: string;
@@ -31,7 +27,6 @@ const FormikSelect = ({
     options,
     error,
     onChange,
-    // onBlur,
     placeholder,
 }: FormikSelectProps) => {
     return (
