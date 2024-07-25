@@ -24,6 +24,7 @@ import FormWrapper from "@/components/FormWrapper";
 import FormikInput from "@/components/inputs/FormikInput";
 import { Button } from "@/components/ui/button";
 import { Form, Formik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from 'yup';
 
 const formBuilderSchema = Yup.object().shape({
@@ -56,6 +57,14 @@ const FormBuilder = ({
     return (
         <>
             <FormWrapper>
+                <div className="mb-10">
+                    <Link to="/" >
+                        <Button>
+                            Back to list
+                        </Button>
+                    </Link>
+                </div>
+
                 <h1 className="text-4xl mb-10">Form Builder</h1>
                 <Formik 
                     initialValues={{
@@ -77,9 +86,6 @@ const FormBuilder = ({
                         handleChange,
                         setFieldValue,
                     }) => {
-                        console.log("errors", errors);
-                        console.log("values", values);
-
                         const handleAddFormElement = () => {
                             setFieldValue("formElements", [...values.formElements, emptyFormElement]);
                         }

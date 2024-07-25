@@ -1,7 +1,7 @@
 import FormWrapper from "@/components/FormWrapper"
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface FormListProps {
     // TODO: type
@@ -28,7 +28,7 @@ const FormList = ({
             </div>
 
             {forms.map((form, index) => (
-                <Card className="p-5 mt-10 flex justify-between items-center">
+                <Card className="p-5 mt-10 flex justify-between items-center" key={index}>
                     <p>
                         {form.formName}
                     </p>

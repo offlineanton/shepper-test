@@ -1,15 +1,15 @@
-import { FormElement } from "@/components/FormElement/FormElement";
+import { Element } from "@/components/FormElement/FormElement";
 import FormLoaderElement from "@/components/FormLoaderElement";
 import FormWrapper from "@/components/FormWrapper";
 import { Button } from "@/components/ui/button";
 import { Form, Formik } from "formik";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface FormLoaderProps {
-    // TODO: type
     form: {
         formName: string;
-        formElements: FormElement[];
+        formElements: Element[];
     };
 }
 
@@ -20,14 +20,19 @@ export type ResultObject = {
 const FormLoader = ({
     form
 }: FormLoaderProps) => {
-    console.log(form.formElements);
     // TODO: type
     const [formSubmitted, setFormSubmitted] = useState<any>();
 
-    console.log("formSubmitted", formSubmitted);
-
     return (
         <FormWrapper>
+            <div className="mb-10">
+                <Link to="/" >
+                    <Button>
+                        Back to list
+                    </Button>
+                </Link>
+            </div>
+
             <h1 className="text-4xl mb-10">{form.formName}</h1>
 
             {formSubmitted ? 
@@ -36,7 +41,6 @@ const FormLoader = ({
                 </pre>
             :
                 <Formik
-                    //TODO: init values
                     initialValues={form.formElements.reduce<ResultObject>((acc, curr) => {
                         acc[curr.name] = undefined;
                         return acc;
@@ -46,19 +50,15 @@ const FormLoader = ({
                     //TODO: schema
                     // validationSchema={formBuilderSchema}
                     onSubmit={(values) => {
-                        // saveForm(values);
-                        console.log("submit", values);
+                        // TODO: Submit form
                         setFormSubmitted(values);
                     }}
                 >
                     {({
                         values,
-                        // errors,
-                        // touched,
                         handleChange,
                         setFieldValue,
                     }) => {
-                        console.log("values", values);
                         return (
                             <Form>
                                 {form.formElements.map(formElement => {
