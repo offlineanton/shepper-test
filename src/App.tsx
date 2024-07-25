@@ -54,16 +54,17 @@ const startForm = [
 function App() {
   const navigate = useNavigate();
 
-  // TODO: type
-  const [savedForms, setSavedForms] = useState<any[]>(startForm);
   const [selectedFormIndex, setSelectedFormIndex] = useState<number | undefined>(0);
+
+  const forms = !!localStorage.getItem("forms") ? JSON.parse(localStorage.getItem("forms")!) : [];
 
   // TODO: type
   const saveForm = (form: any) => {
-    setSavedForms([...savedForms, form]);
+    localStorage.setItem("forms", JSON.stringify([...forms, form]));
     navigate("/");
-    console.log(savedForms);
   };
+
+  console.log("forms", forms);
 
   const fillInForm = (index: number) => {
     setSelectedFormIndex(index);
@@ -74,8 +75,8 @@ function App() {
     <>
       <Routes>
         <Route path="/form-builder" element={<FormBuilder saveForm={saveForm} />} />
-        <Route path="/form-loader" element={<FormLoader form={selectedFormIndex !== undefined ? savedForms[selectedFormIndex] : undefined}/>} />
-        <Route path="/" element={<FormList forms={savedForms} fillInForm={fillInForm} />}>
+        <Route path="/form-loader" element={<FormLoader form={selectedFormIndex !== undefined ? forms[selectedFormIndex] : undefined}/>} />
+        <Route path="/" element={<FormList forms={forms} fillInForm={fillInForm} />}>
         </Route>
       </Routes>
     </>
