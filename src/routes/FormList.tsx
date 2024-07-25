@@ -27,6 +27,8 @@ const FormList = ({
                 </Link>
             </div>
 
+            {!forms.length && <p>You have no forms created</p>}
+
             {forms.map((form, index) => (
                 <Card className="p-5 mt-10 flex justify-between items-center" key={index}>
                     <p>

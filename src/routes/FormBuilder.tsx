@@ -1,3 +1,4 @@
+import ErrorMessage from "@/components/ErrorMessage";
 import FormElement, { Element } from "@/components/FormElement/FormElement";
 import FormWrapper from "@/components/FormWrapper";
 import FormikInput from "@/components/inputs/FormikInput";
@@ -50,8 +51,8 @@ const FormBuilder = ({
                         formName: "",
                         formElements: [] as Element[],
                     }}
-                    validateOnChange={false}
-                    validateOnBlur={false}
+                    // validateOnChange={false}
+                    // validateOnBlur={false}
                     validationSchema={formBuilderSchema}
                     onSubmit={(values) => {
                         saveForm(values);
@@ -61,7 +62,6 @@ const FormBuilder = ({
                     {({
                         values,
                         errors,
-                        touched,
                         handleChange,
                         setFieldValue,
                     }) => {
@@ -83,7 +83,7 @@ const FormBuilder = ({
                                     label="Form Name"
                                     value={values.formName}
                                     onChange={handleChange}
-                                    error={touched.formName ? errors.formName : undefined}
+                                    error={errors.formName}
                                     placeholder={"Enter the name of your form here"}
                                 />
 
@@ -102,6 +102,12 @@ const FormBuilder = ({
                                         />
                                     )
                                 })}
+
+                                {errors.formElements && values.formElements.length === 0 &&
+                                    <div className="mt-5">
+                                        <ErrorMessage>Please add a form element</ErrorMessage>
+                                    </div> 
+                                }
 
                                 <Button 
                                     className="mt-5"
