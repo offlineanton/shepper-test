@@ -1,7 +1,6 @@
-import { emptyFormElement, EmptyFormElement } from "@/routes/FormBuilder";
 import { Button } from "../ui/button";
 import { FormikErrors } from "formik";
-import FormElement from "./FormElement";
+import { Element } from "./FormElement";
 import { Card } from "../ui/card";
 import FormikInput from "../inputs/FormikInput";
 import IndexMarker from "../IndexMarker";
@@ -10,7 +9,7 @@ import { useState } from "react";
 interface FormElementSelectOptionsProps {
     setFieldValue: (field: string, value: any, shouldValidate?: boolean) => Promise<void | FormikErrors<{
         formName: string;
-        formElements: EmptyFormElement[];
+        formElements: Element[];
     }>>;
     index: number;
     options: FormElementSelectOption[];
