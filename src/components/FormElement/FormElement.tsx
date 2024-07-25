@@ -2,14 +2,13 @@ import { FormikErrors } from "formik";
 import FormElementWrapper from "./FormElementWrapper";
 import FormikSelect from "../inputs/FormikSelect";
 import FormikInput from "../inputs/FormikInput";
-import { EmptyFormElement } from "@/routes/FormBuilder";
 import { Button } from "../ui/button";
 import FormElementSelectOptions, { FormElementSelectOption } from "./FormElementSelectOptions";
 import IndexMarker from "../IndexMarker";
   
-type FormElementType = "text" | "textarea" | "checkbox" | "select";
+type FormElementType = "text" | "textarea" | "checkbox" | "select" | "";
 
-export interface FormElement {
+export interface Element {
     type: FormElementType;
     name: string;
     label: string;
@@ -20,10 +19,10 @@ interface FormElementProps {
     index: number;
     setFieldValue: (field: string, value: any, shouldValidate?: boolean) => Promise<void | FormikErrors<{
         formName: string;
-        formElements: EmptyFormElement[];
+        formElements: Element[];
     }>>;
     handleRemoveFormElement: (index: number) => void;
-    formElement: FormElement;
+    formElement: Element;
     errors?: { [key: string]: string };
 }
 

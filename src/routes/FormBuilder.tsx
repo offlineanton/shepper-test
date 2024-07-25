@@ -19,7 +19,7 @@
  * 
  */
 
-import FormElement from "@/components/FormElement/FormElement";
+import FormElement, { Element } from "@/components/FormElement/FormElement";
 import FormWrapper from "@/components/FormWrapper";
 import FormikInput from "@/components/inputs/FormikInput";
 import { Button } from "@/components/ui/button";
@@ -39,13 +39,7 @@ const formBuilderSchema = Yup.object().shape({
         .min(1, "Please add a form element")
 });
 
-export interface EmptyFormElement {
-    name: string;
-    type: string;
-    label: string;
-}
-
-export const emptyFormElement = {
+export const emptyFormElement: Element = {
     name: "",
     type: "",
     label: "",
@@ -66,7 +60,7 @@ const FormBuilder = ({
                 <Formik 
                     initialValues={{
                         formName: "",
-                        formElements: [] as EmptyFormElement[],
+                        formElements: [] as Element[],
                     }}
                     validateOnChange={false}
                     validateOnBlur={false}
